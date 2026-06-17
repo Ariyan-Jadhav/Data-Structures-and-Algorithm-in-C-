@@ -35,7 +35,7 @@ void binary_string(vector<string> &vcc, string s, string og_str)
 int main()
 {
     vector<string> vcc;
-    string s = "abcde";
+    string s = "abcdefghij";
     binary_string(vcc, "", s);
     for (int i = 0; i < vcc.size(); i++)
         cout << vcc[i] << " ";
