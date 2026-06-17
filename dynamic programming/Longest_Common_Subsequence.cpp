@@ -2,7 +2,7 @@
 Input:
  str1 = "bdefg", str2 = "bfg"
 Output:
- 3
+ bfg
 Explanation:
  The longest common subsequence is "bfg", which has a length of 3. */
 
