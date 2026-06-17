@@ -30,11 +30,33 @@ private:
     }
 
 public:
-    int countK(vector<int> &nums, int target)
+    int countK(vector<int> &nums, int k)
     {
         int n = nums.size();
-        vector<vector<int>> dp(n, vector<int>(target + 1, -1));
-        return f(n - 1, target, nums, dp);
+        vector<vector<int>> dp(n, vector<int>(k + 1, 0));
+
+        if (nums[0] == 0)
+            dp[0][0] = 2;
+        else
+            dp[0][0] = 1;
+
+        if (nums[0] != 0 && nums[0] <= k)
+            dp[0][nums[0]] = 1;
+
+        for (int ind = 1; ind < n; ind++)
+        {
+            for (int target = 0; target <= k; target++)
+            {
+                int notTake = dp[ind - 1][target];
+
+                int take = false;
+                if (nums[ind] <= target)
+                    take = dp[ind - 1][target - nums[ind]];
+
+                dp[ind][target] = notTake + take;
+            }
+        }
+        return dp[n - 1][k];
     }
 };
 
@@ -42,7 +64,7 @@ int main()
 {
     Solution sol;
 
-    vector<int> vcc = {0, 0, 0, 0, 0, 0, 2};
+    vector<int> vcc = {0, 0, 2};
     int target = 2;
 
     cout << sol.countK(vcc, target);
